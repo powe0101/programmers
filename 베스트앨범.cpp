@@ -14,8 +14,8 @@ Comparator compFunctor =
 vector<int> solution(vector<string> genres, vector<int> plays) {
     vector<int> answer;
 
-    multimap<int, pair<string,int>, greater<int>> m;
-    map<string, int> u;
+    multimap<int, pair<string,int>, greater<int>> m; //오름차순, genre 와 playtime 페어화. 중복 허용 위해 multimap
+    map<string, int> u; // 장르별 총 플레이타임 정렬용.
     for (int i = 0; i < genres.size(); ++i)
     {
         m.insert(pair<int,pair<string,int>>(plays[i],pair<string,int>(genres[i],i)));
@@ -44,11 +44,11 @@ vector<int> solution(vector<string> genres, vector<int> plays) {
                     {
                         if(find(answer.begin(),answer.end(), iter->second.second) != answer.end())
                             continue;
-                        id = iter->second.second;
+                        id = iter->second.second; //제일 작은 고유번호 가져오기.
                     }
                 }
                 answer.push_back(id);
-                if(++count > 1)
+                if(++count > 1) //큰거 2
                     break;
             }
         }
