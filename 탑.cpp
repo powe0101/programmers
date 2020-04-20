@@ -29,7 +29,7 @@ vector<int> solution(vector<int> heights) {
 
     }
 
-    reverse(answer.begin(),answer.end());
+    reverse(answer.begin(),answer.end()); // 맨 왼쪽부터 출력해야 하므로 reverse
 
     return answer;
 }
