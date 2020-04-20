@@ -5,17 +5,16 @@ vector<int> solution(vector<int> heights) {
     vector<int> answer;
     int temp = -1;
 
-    while((temp = heights.back()) != 0)
+    while((temp = heights.back()) != 0) // heights의 제일 뒤를 꺼내옴.
     {
-        int idx = heights.size()-1;
-        int count = 0;
+        int idx = heights.size()-1; // 사이즈 저장 temp
 
-        for(int i = idx; heights.size() >= 0; --i)
+        for(int i = idx; heights.size() >= 0; --i) // 뒤에서부터 0까지 읽음.
         {
-            int nextTower = heights[i];
-            if(temp < nextTower)
+            int nextTower = heights[i]; // 다음 신호를 받는 타워의 높이
+            if(temp < nextTower) // 순회하면서 다음 타워의 높이가 현재 타워보다 높으면
             {
-                if(i+1 == -1)
+                if(i+1 == -1) // 하지만 현재 타워 idx가 마지막이면
                 {
                     answer.push_back(0);
                 }
@@ -23,7 +22,7 @@ vector<int> solution(vector<int> heights) {
                 {
                     answer.push_back(i+1);
                 }
-                heights.erase(heights.end()-1);
+                heights.erase(heights.end()-1); // 꺼내온 제일 뒤 타워 삭제.
                 break;
             }
         }
