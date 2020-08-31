@@ -19,17 +19,17 @@ vector<int> solution(vector<int> progresses, vector<int> speeds)
         if((100-progress) % speed != 0)
             day += 1;
         
-        if(maximum >= day)
+        if(maximum >= day) // 기존 진행 중인 작업보다 더 적게 걸리면
             count += 1;
         else
         {
-            maximum = day;
-            answer.push_back(count);
-            count = 1;
+            maximum = day; // 더 오래걸리면 최대값 변경
+            if(count > 0)
+                answer.push_back(count); 
+            count = 1; //초기화
         }
     }
     
-    answer.erase(answer.begin());
     answer.push_back(count);
     return answer;
 }
