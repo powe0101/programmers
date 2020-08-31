@@ -14,10 +14,7 @@ vector<int> solution(vector<int> progresses, vector<int> speeds)
         int progress = progresses.front(); progresses.erase(progresses.begin());
         int speed = speeds.front(); speeds.erase(speeds.begin());
         
-        int day = (((100 - progress) / speed));
-        
-        if((100-progress) % speed != 0)
-            day += 1;
+        int day = ceil(((double)(100 - progress) / speed));
         
         if(maximum >= day) // 기존 진행 중인 작업보다 더 적게 걸리면
             count += 1;
