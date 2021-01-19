@@ -1,0 +1,90 @@
+//https://programmers.co.kr/learn/courses/30/lessons/42839?language=cpp#
+#include <bits/stdc++.h>
+
+using namespace std;
+set<int> results;
+void permute(string str, string out)
+{
+    // When size of str becomes 0, out has a
+    // permutation (length of out is n)
+    if (str.size() == 0)
+    {
+        results.insert(stoi(out));
+        return;
+    }
+ 
+    // One be one move all characters at
+    // the beginning of out (or result)
+    for (int i = 0; i < str.size(); i++)
+    {
+        // Remove first character from str and
+        // add it to out
+        permute(str.substr(1), out + str[0]);
+ 
+        // Rotate string in a way second character
+        // moves to the beginning.
+        rotate(str.begin(), str.begin() + 1, str.end());
+    }
+}
+ 
+bool isPrime(int n) {
+    if(n<=1) {
+        return false;
+    }
+
+    for(int i=2; i<=sqrt(n); i++) {
+        if((n%i)==0) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+int solution(string numbers) {
+    int answer = 0;
+    int index = numbers.size();
+    permute(numbers, "");
+    
+    for(int i = 0; i < numbers.size(); ++i)
+    {
+        auto temp = stoi(to_string(numbers[i])) - '0';
+        results.insert(temp);
+    }
+    
+    for(int i = 1; i < numbers.size(); ++i)
+    {
+        string str = numbers.substr(0, i);
+        permute(str, "");
+    }
+    
+    for(int i = 1; i < numbers.size()-1; ++i)
+    {
+        string str = numbers.substr(i, i+1);
+        permute(str,"");
+    }
+    
+    reverse(numbers.begin(),numbers.end());
+    for(int i = 1; i < numbers.size(); ++i)
+    {
+        string str = numbers.substr(0, i);
+        permute(str, "");
+    }
+    
+    for(int i = 1; i < numbers.size()-1; ++i)
+    {
+        string str = numbers.substr(i, i+1);
+        permute(str,"");
+    }
+    
+    for(auto iter = results.begin(); iter != results.end(); ++iter)
+    {
+        auto temp = *iter;
+        if(temp != 0 && isPrime(temp) == true){
+            cout << temp << endl;
+            answer += 1;
+        }
+    }
+    
+    return answer;
+}
